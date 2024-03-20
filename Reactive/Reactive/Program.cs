@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,60 +10,66 @@ namespace Reactive
     {
         static void Main(string[] args)
         {
-            PersonManager manager = new PersonManager();
-            Customer customer = new Customer
+            SystemUse system = new SystemUse();
+            Member member = new Member()
             {
-                ID = 148651231,
-                FirstName = "Furkan",
-                LastName = "Gül",
-                Adress = "Türkiye"
+                UserID = 12348526,
+                UserFirstName = "Furkan",
+                UserLastName = "Gül",
+                UserAdress = "Turkey",
+                UserNumber = 5418640498,
             };
-            manager.Add(customer);
-            Student student = new Student
-            {
-                ID = 148651231,
-                FirstName = "Furkan",
-                LastName = "Gül",
-                Departmant = "Software Engeenering"
+            Adminstrator administrator = new Adminstrator();
 
-            };
-            manager.Add(student);
-            Console.ReadLine();
-        }
-        interface Iperson
-        {
-            int ID { get; set; }
-            string FirstName { get; set; }
-            string LastName { get; set; }
-
+            system.Add(member);
             
 
+            Console.ReadLine();
         }
 
-        private class Customer : Iperson
+        interface IUser
         {
-            public int ID { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Adress { get; set; }
-        }
-        class Student : Iperson
-        {
-            public int ID { get; set; }
-            public string FirstName { get; set; }
-            public string LastName { get; set; }
-            public string Departmant { get; set; }
+            int UserID { get; set; }
+            string UserFirstName { get; set; }
+            string UserLastName { get; set; }
+            string UserAdress { get; set; }
+            long UserNumber { get; set;  }
+
         }
 
-        class PersonManager
+        class Adminstrator : IUser
         {
-            public void Add(Iperson person)
+            public int UserID { get; set; }
+            public string UserFirstName { get; set; }
+            public string UserLastName { get; set; }
+            public string UserAdress { get; set; }
+            public long UserNumber { get; set; }
+        }
+
+        class Member : IUser
+        {
+            public int UserID { get; set; }
+            public string UserFirstName { get; set; }
+            public string UserLastName { get; set; }
+            public string UserAdress { get; set; }
+            public long UserNumber { get; set; }
+        }
+
+
+        class SystemUse
+        {
+            public void Add(IUser user)
             {
-                Console.WriteLine("ID : {0}", person.ID);
-                Console.WriteLine("First Name : {0}", person.FirstName);
-                Console.WriteLine("Last Name : {0}", person.LastName);
+                Console.WriteLine("User ID: {0}", user.UserID);
+                Console.WriteLine("First Name: {0}", user.UserFirstName);
+                Console.WriteLine("Last Name: {0}", user.UserLastName);
+                Console.WriteLine("Adress: {0}", user.UserAdress);
+                Console.WriteLine("Phone Number: {0}", user.UserNumber);
 
             }
+
         }
+
+
     }
 }
